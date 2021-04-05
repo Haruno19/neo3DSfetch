@@ -6,8 +6,8 @@ It's highly inspired by https://github.com/videah/3dsfetch (from which I took th
 
 ### How it works
 
-To put it simple, it's not as cool as common fetch tools, it does not take the information directly from the system or something. 
-There's a .ini file it reads information from. 
+To put it simple, it's not as cool as common fetch tools: it does not take the information directly from the system or something. 
+There's a `.ini` file it reads information from. 
 
 
 ### How to use
