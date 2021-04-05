@@ -26,4 +26,4 @@ To edit the displayed info, edit the `info.ini` file; here is the order in which
 
 ____
 
-For any question, post and issue or contact me on [reddit](www.reddit.com/user/Joker_513)! :)
+For any question, post and issue or contact me on [reddit](https://www.reddit.com/user/Joker_513)! :)
