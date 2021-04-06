@@ -127,6 +127,7 @@ int main(int argc, char* argv[])
 	gfxInitDefault();
 	consoleInit(GFX_TOP, NULL);
 
+	initColors();
 	getInfo();
 	
 	while (aptMainLoop())
@@ -135,7 +136,6 @@ int main(int argc, char* argv[])
 		gfxSwapBuffers();
 		hidScanInput();
 
-		initColors();
 		getTime();
 		
 		if(timeCheck())
