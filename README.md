@@ -17,15 +17,15 @@ There's a `.ini` file it reads information from.
 Copy in your SD's `/3ds` folder the `.3dsx` file and the `info.ini` file you find in `/source`.
 To edit the displayed info, edit the `info.ini` file; here is the order in which you have to write the info (every single piece of info must go on a new line):
 
-1. color
-1. user@host
-1. Luma version
-1. 3DS Firmware version
-1. Device 
-1. Screen resolution
-1. CPU
-1. GPU
-1. Memory
+1. `color`
+1. `user@host`
+1. `Luma version`
+1. `3DS Firmware version`
+1. `Device`
+1. `Screen resolution`
+1. `CPU`
+1. `GPU`
+1. `Memory`
 
 The `color` parameter can be: 
 1. `red`
