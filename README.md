@@ -35,6 +35,7 @@ The `color` parameter can be:
 1. `magenta`
 1. `cyan`
 1. `white`
+
 It must be written in lowercase, if there's anything wrong with your parameter, color will be set to `red`. 
 ____
 
