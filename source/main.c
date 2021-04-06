@@ -8,12 +8,14 @@
 #define strLen 30
 
 char info[infoNum][strLen];
+char colors[7][strLen];
 int hours, minutes, pmin=-1;
+int colorIndex=0;
 
 void getInfo()
 {
 	FILE *fp;
-	int i=0;
+	int i=1;
 
 	fp = fopen("info.ini", "r");
 	rewind(fp);
@@ -23,13 +25,13 @@ void getInfo()
         i++;
     }
 
-    for(i=0;i<infoNum;i++)
+    for(i=1;i<infoNum;i++)
     {
         if(info[i][strlen(info[i])-1] == 10)
             info[i][strlen(info[i])-1] = 0;
     }
 
-    for(i=0;i<infoNum;i++)
+    for(i=1;i<infoNum;i++)
     {
         char *ptr = strchr(info[i], '\r');
         if (ptr)
@@ -54,6 +56,11 @@ void getTime()
 
 void printLogo()
 {
+	iprintf("\x1b[2J");
+	printf("\n\n");
+	printf("                     - %02d:%02d -", hours, minutes); 
+	printf("\n\n\n\n\n");
+
     setvbuf(stdout, NULL, _IONBF, 0); 
 	printf("       ######       %s",info[0]);
     							printf("%s\033[0;m\n",info[1]);
@@ -84,24 +91,19 @@ void printLogo()
 
 void getColor()
 {
-	if(strcmp(info[0],"red")==0)
-		strcpy(info[0],"\033[1;31m");
-	else if(strcmp(info[0],"green")==0)
-		strcpy(info[0],"\033[1;32m");
-	else if(strcmp(info[0],"yellow")==0)
-		strcpy(info[0],"\033[1;33m");
-	else if(strcmp(info[0],"blue")==0)
-		strcpy(info[0],"\033[1;34m");
-	else if(strcmp(info[0],"magenta")==0)
-		strcpy(info[0],"\033[1;35m");
-	else if(strcmp(info[0],"cyan")==0)
-		strcpy(info[0],"\033[1;36m");
-	else if(strcmp(info[0],"white")==0)
-		strcpy(info[0],"\033[1;37m");
-	else
-		strcpy(info[0],"\033[1;31m");
-
+	strcpy(info[0],colors[colorIndex]);
     fflush(NULL);
+}
+
+void initColors()
+{
+	strcpy(colors[0],"\033[1;31m");
+	strcpy(colors[1],"\033[1;32m");
+	strcpy(colors[2],"\033[1;33m");
+	strcpy(colors[3],"\033[1;34m");
+	strcpy(colors[4],"\033[1;35m");
+	strcpy(colors[5],"\033[1;36m");
+	strcpy(colors[6],"\033[1;37m");
 }
 
 int timeCheck()
@@ -114,32 +116,43 @@ int timeCheck()
 	return 0;
 }
 
+void updateColorIndex()
+{
+	if(colorIndex++ > 6)
+		colorIndex=0;
+}
+
 int main(int argc, char* argv[])
 {
 	gfxInitDefault();
 	consoleInit(GFX_TOP, NULL);
 
+	getInfo();
+	
 	while (aptMainLoop())
 	{
 		gspWaitForVBlank();
 		gfxSwapBuffers();
 		hidScanInput();
 
+		initColors();
 		getTime();
+		
 		if(timeCheck())
 		{
-			iprintf("\x1b[2J");
-			printf("\n\n");
-			printf("                     - %02d:%02d -", hours, minutes); 
-			printf("\n\n\n\n\n");
-			getInfo();
 			getColor();
 			printLogo();
 		}
 
 		u32 kDown = hidKeysDown();
 		if (kDown & KEY_START)
-			break; 
+			break;
+		else if(kDown & KEY_SELECT)
+		{
+			updateColorIndex();
+			getColor();
+			printLogo();
+		}
 	}
 
 	gfxExit();
