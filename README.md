@@ -2,7 +2,7 @@
 
 neo3DSfetch is a tool similar to neofetch for the Nintendo 3DS (you need homebrew/CFW to run it).
 It displays the current time, a cute ascii art and some system info.
-neo3DSfetch is inspired by [3dsfetch by videah](https://github.com/videah/3dsfetch) (from which I took the ascii art). 
+I took inspiration from [3dsfetch by videah](https://github.com/videah/3dsfetch) (from which I took the ascii art). 
 
 
 
